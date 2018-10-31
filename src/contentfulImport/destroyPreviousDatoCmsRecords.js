@@ -3,7 +3,7 @@ import Progress from './progress';
 import { toItemApiKey } from './toApiKey';
 
 export default async ({ datoClient, contentfulData }) => {
-  let spinner = ora('Fetching for existing records').start();
+  let spinner = ora('Fetching existing records').start();
 
   const records = await datoClient.items.all({}, { allPages: true });
   const itemTypes = await datoClient.itemTypes.all({}, { allPages: true });

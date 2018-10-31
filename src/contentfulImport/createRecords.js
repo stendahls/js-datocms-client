@@ -30,7 +30,7 @@ export default async ({
     if (itemType) {
       const emptyFieldValues = itemTypeFields.reduce((acc, field) => {
         if (field.localized) {
-          const value = locales
+          const value = contentfulData.locales
             .map(locale => locale.slice(0, 2))
             .reduce((acc, locale) => Object.assign(acc, { [locale]: null }), {});
           return Object.assign(acc, { [camelize(field.apiKey)]: value });
@@ -72,7 +72,7 @@ export default async ({
               return Object.assign(innerAcc, { [locale.slice(0, 2)]: innerValue });
             }, {});
 
-          const fallbackValues = locales.reduce((acc, locale) => {
+          const fallbackValues = contentfulData.locales.reduce((acc, locale) => {
             return Object.assign(acc, { [locale.slice(0, 2)]: localizedValue[defaultLocale.slice(0, 2)] });
           }, {});
 

@@ -105,7 +105,7 @@ export default async ({
               [locale.slice(0, 2)]: innerValue.map(link => contentfulAssetsMap[link.sys.id]),
             });
           }, {});
-        const fallbackValues = locales.reduce((innerAcc, locale) => {
+        const fallbackValues = contentfulData.locales.reduce((innerAcc, locale) => {
           return Object.assign(innerAcc, { [locale.slice(0, 2)]: localizedValue[defaultLocale.slice(0, 2)] });
         }, {});
 

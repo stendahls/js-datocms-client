@@ -4,7 +4,7 @@ import pkg from '../package.json';
 import dump from './dump/command';
 import check from './check/command';
 import wpImport from './wpImport/command';
-import contentfulImport from './contentfulImport/copy';
+import contentfulImport from './contentfulImport/command';
 
 dotenv.load({ silent: true });
 

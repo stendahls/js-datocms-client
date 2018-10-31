@@ -2,7 +2,7 @@ import ora from 'ora';
 import Progress from './progress';
 
 export default async ({ datoClient, contentfulData }) => {
-  let spinner = ora('Fetching for useless assets').start();
+  let spinner = ora('Fetching assets not in use').start();
 
   const uploads = await datoClient.uploads.all({ 'filter[type]': 'not_used' }, { allPages: true });
   const assets = contentfulData.assets;
