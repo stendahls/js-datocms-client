@@ -13,6 +13,7 @@ export default async ({
   const entries = contentfulData.entries;
   const progress = new Progress(entries.length, 'Linking records');
   const defaultLocale = contentfulData.defaultLocale;
+  const { camelize } = require('humps');
 
   spinner.text = progress.tick();
 
@@ -57,14 +58,14 @@ export default async ({
           return Object.assign(acc, { [locale.slice(0, 2)]: localizedValue[defaultLocale.slice(0, 2)] });
         }, {});
 
-        return Object.assign(acc, { [apiKey]: { ...fallbackValues, ...localizedValue } });
+        return Object.assign(acc, { [camelize(apiKey)]: { ...fallbackValues, ...localizedValue } });
       }
       const innerValue = value[defaultLocale];
       if (field.fieldType === 'link') {
-        return Object.assign(acc, { [apiKey]: contentfulRecordMap[innerValue.sys.id] });
+        return Object.assign(acc, { [camelize(apiKey)]: contentfulRecordMap[innerValue.sys.id] });
       }
       return Object.assign(acc, {
-        [apiKey]: innerValue.map(link => contentfulRecordMap[link.sys.id]),
+        [camelize(apiKey)]: innerValue.map(link => contentfulRecordMap[link.sys.id]),
       });
     }, {});
 

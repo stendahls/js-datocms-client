@@ -1,6 +1,7 @@
 import ora from 'ora';
 import Progress from './progress';
 import { toItemApiKey, toFieldApiKey } from './toApiKey';
+const { camelize } = require('humps');
 
 export default async ({
   itemTypes, fields, datoClient, contentfulData,
@@ -9,7 +10,6 @@ export default async ({
   const entries = contentfulData.entries;
   const defaultLocale = contentfulData.defaultLocale;
   const progress = new Progress(entries.length, 'Creating records');
-  const { camelize } = require('humps');
 
   const contentfulRecordMap = {};
 

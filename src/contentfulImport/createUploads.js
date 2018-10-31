@@ -110,7 +110,7 @@ export default async ({
         }, {});
 
 
-        recordAttributes = Object.assign(recordAttributes, { [apiKey]: { ...fallbackValues, ...localizedValue } });
+        recordAttributes = Object.assign(recordAttributes, { [camelize(apiKey)]: { ...fallbackValues, ...localizedValue } });
       } else {
         const innerValue = value[defaultLocale];
 
