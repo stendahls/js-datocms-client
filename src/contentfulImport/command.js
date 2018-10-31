@@ -33,6 +33,14 @@ export default async (contentfulToken, contentfulSpaceId, datoCmsToken) => {
     datoClient,
     contentfulData,
   });
+  
+  await createUploads({
+    fields,
+    itemTypes,
+    datoClient,
+    contentfulData,
+    contentfulRecordMap,
+  });
 
   await addValidationsOnField({
     itemTypes, fields, datoClient, contentfulData,
@@ -45,11 +53,4 @@ export default async (contentfulToken, contentfulSpaceId, datoCmsToken) => {
     contentfulRecordMap,
   });
 
-  await createUploads({
-    fields,
-    itemTypes,
-    datoClient,
-    contentfulData,
-    contentfulRecordMap,
-  });
 };

@@ -57,8 +57,7 @@ export default async ({
         process.exit();
       }
     } else {
-      console.log(asset);
-      spinner.text = process.tick();
+      spinner.text = progress.tick();
     }
   }
 
