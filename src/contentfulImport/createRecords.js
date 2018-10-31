@@ -9,6 +9,7 @@ export default async ({
   const entries = contentfulData.entries;
   const defaultLocale = contentfulData.defaultLocale;
   const progress = new Progress(entries.length, 'Creating records');
+  const { camelize } = require('humps');
 
   const contentfulRecordMap = {};
 
@@ -32,9 +33,9 @@ export default async ({
           const value = locales
             .map(locale => locale.slice(0, 2))
             .reduce((acc, locale) => Object.assign(acc, { [locale]: null }), {});
-          return Object.assign(acc, { [field.apiKey]: value });
+          return Object.assign(acc, { [camelize(field.apiKey)]: value });
         }
-        return Object.assign(acc, { [field.apiKey]: null });
+        return Object.assign(acc, { [camelize(field.apiKey)]: null });
       }, {});
 
       const recordAttributes = Object.entries(entry.fields).reduce((acc, [option, value]) => {
@@ -75,7 +76,7 @@ export default async ({
             return Object.assign(acc, { [locale.slice(0, 2)]: localizedValue[defaultLocale.slice(0, 2)] });
           }, {});
 
-          return Object.assign(acc, { [apiKey]: { ...fallbackValues, ...localizedValue } });
+          return Object.assign(acc, { [camelize(apiKey)]: { ...fallbackValues, ...localizedValue } });
         }
         let innerValue = value[defaultLocale];
 
@@ -93,7 +94,7 @@ export default async ({
         if (field.fieldType === 'json') {
           innerValue = JSON.stringify(innerValue, null, 2);
         }
-        return Object.assign(acc, { [apiKey]: innerValue });
+        return Object.assign(acc, { [camelize(apiKey)]: innerValue });
       }, emptyFieldValues);
 
       try {

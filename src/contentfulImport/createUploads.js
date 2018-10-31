@@ -4,6 +4,7 @@ import {
   toItemApiKey,
   toFieldApiKey,
 } from './toApiKey';
+const { camelize } = require('humps');
 
 export default async ({
   fields,
@@ -126,7 +127,7 @@ export default async ({
         }
 
         recordAttributes = Object.assign(recordAttributes, {
-          [apiKey]: uploadedFile,
+          [camelize(apiKey)]: uploadedFile,
         });
       }
     }
